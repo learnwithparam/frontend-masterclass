@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore - Authentication</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span>📚</span><h1>BookStore</h1>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="active">Catalog</a>
+            <span id="auth-status" class="auth-badge"></span>
+            <button id="logout-btn" class="btn btn-sm btn-outline hidden">Logout</button>
+        </nav>
+    </header>
+
+    <div class="app-layout container">
+        <!-- Auth Panel: Login / Register -->
+        <aside class="sidebar">
+            <!-- Login Form -->
+            <div id="login-panel" class="card">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <input type="text" id="login-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </form>
+                <div id="login-error" class="feedback error hidden"></div>
+                <p class="text-sm text-muted" style="margin-top:1rem;">
+                    No account? <a href="#" id="show-register">Register here</a>
+                </p>
+            </div>
+
+            <!-- Register Form (hidden by default) -->
+            <div id="register-panel" class="card hidden">
+                <h2>Register</h2>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" name="username" minlength="3" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" name="password" minlength="6" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+                <div id="register-error" class="feedback error hidden"></div>
+                <p class="text-sm text-muted" style="margin-top:1rem;">
+                    Already have an account? <a href="#" id="show-login">Login here</a>
+                </p>
+            </div>
+
+            <!-- Add Book (only visible when authenticated) -->
+            <div id="add-book-panel" class="card hidden">
+                <h2>Add Inventory</h2>
+                <p class="text-sm text-muted">You are authenticated. Add books to the catalog.</p>
+                <form id="add-book-form">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pages">Pages</label>
+                            <input type="number" id="pages" name="pages" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="published">Year</label>
+                            <input type="text" id="published" name="published" required>
+                        </div>
+                    </div>
+                    <button type="submit" id="submit-btn" class="btn btn-primary">Add Book</button>
+                </form>
+                <div id="form-success" class="feedback success hidden"></div>
+                <div id="form-error" class="feedback error hidden"></div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h2>Live Catalog</h2>
+            <div id="loading" class="state-msg"><div class="spinner"></div><p>Loading...</p></div>
+            <div id="error-message" class="state-msg error-state hidden"><p class="msg-text"></p></div>
+            <div id="book-list" class="responsive-grid"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

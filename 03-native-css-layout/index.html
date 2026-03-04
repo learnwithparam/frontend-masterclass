@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore - Responsive Layout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="logo-icon">📚</span>
+            <h1>BookStore</h1>
+        </div>
+        
+        <button id="mobile-menu-btn" class="hamburger" aria-label="Toggle menu">☰</button>
+
+        <nav class="nav-links" id="nav-links">
+            <a href="#" class="active">Catalog</a>
+            <a href="#">Categories</a>
+            <a href="#">Cart (0)</a>
+        </nav>
+    </header>
+
+    <div class="app-layout container">
+        <!-- Sidebar: Add Book Form -->
+        <aside class="sidebar">
+            <div class="sticky-panel card">
+                <h2>Add Inventory</h2>
+                <p class="text-muted text-sm">Stock the shelves via the API.</p>
+                
+                <form id="add-book-form">
+                    <div class="form-group">
+                        <label for="title">Book Title</label>
+                        <input type="text" id="title" name="title" placeholder="e.g. Clean Code" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author Name</label>
+                        <input type="text" id="author" name="author" placeholder="e.g. Robert C. Martin" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pages">Pages</label>
+                            <input type="number" id="pages" name="pages" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="published">Year</label>
+                            <input type="text" id="published" name="published" placeholder="YYYY" required>
+                        </div>
+                    </div>
+                    <button type="submit" id="submit-btn" class="btn btn-primary">Add Book</button>
+                </form>
+                <div id="form-error" class="feedback error hidden"></div>
+                <div id="form-success" class="feedback success hidden"></div>
+            </div>
+        </aside>
+
+        <!-- Main Content: Book Catalog -->
+        <main class="main-content">
+            <section class="catalog-header">
+                <h2>Live Catalog</h2>
+                <input type="search" placeholder="Search books..." class="search-input">
+            </section>
+
+            <div id="loading" class="state-msg">
+                <div class="spinner"></div>
+                <p>Syncing with server...</p>
+            </div>
+            <div id="error-message" class="state-msg error-state hidden">
+                <p class="msg-text"></p>
+                <button id="retry-btn" class="btn btn-outline">Try Again</button>
+            </div>
+
+            <div id="book-list" class="responsive-grid"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

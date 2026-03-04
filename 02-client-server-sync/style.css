@@ -1,0 +1,174 @@
+/* Modern CSS Reset & Setup */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary-color: #ff4f01;
+    --primary-hover: #e64600;
+    --bg-color: #fafafa;
+    --card-bg: #ffffff;
+    --text-main: #1a1a1a;
+    --text-muted: #6b7280;
+    --border-color: #e5e5e5;
+    --danger-color: #ef4444;
+    --success-color: #22c55e;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+}
+
+.navbar h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.hero p {
+    color: var(--text-muted);
+}
+
+/* Book Grid (Simple CSS Grid) */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+/* Book Card */
+.book-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1em;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.book-card.out-of-stock {
+    opacity: 0.7;
+    filter: grayscale(0.5);
+}
+
+.book-details h3 {
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+}
+
+.book-details .author {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.book-details .price {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+/* Card Actions */
+.book-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.stock-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+}
+
+.stock-badge.in-stock {
+    background-color: #d1fae5;
+    color: var(--success-color);
+}
+
+.stock-badge.empty {
+    background-color: #fee2e2;
+    color: var(--danger-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.75em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.35s ease;
+}
+
+button:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+button:disabled {
+    background-color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+/* Utility Classes */
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.error {
+    background-color: #fee2e2;
+    color: var(--danger-color);
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    text-align: center;
+    border: 1px solid #fecaca;
+}
+
+.hidden {
+    display: none !important;
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore - Client/Server Sync</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional minimal styles for the form */
+        .add-book-section {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <h1>📚 Live Bookstore</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- New Section: Form to POST data -->
+        <section class="add-book-section">
+            <h2>Add a New Book</h2>
+            <form id="add-book-form">
+                <div class="form-group">
+                    <label for="title">Book Title</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pages">Total Pages</label>
+                        <input type="number" id="pages" name="pages" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="published">Publication Year</label>
+                        <input type="text" id="published" name="published" required>
+                    </div>
+                </div>
+                <button type="submit" id="submit-btn" style="width: 100%;">Add to Catalog</button>
+            </form>
+            <div id="form-error" class="error hidden" style="margin-top: 1rem;"></div>
+            <div id="form-success" class="success hidden" style="margin-top: 1rem; color: var(--success-color); padding: 1rem; background-color: #d1fae5; border-radius: 6px; text-align: center;"></div>
+        </section>
+
+        <!-- Our empty container where JS will inject elements -->
+        <h2>Current Catalog</h2>
+        <div id="loading" class="loading">Connecting to API...</div>
+        <div id="error-message" class="error hidden"></div>
+        <div id="book-list" class="book-grid"></div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "The Pragmatic Programmer",
+    "author": "Andrew Hunt",
+    "price": 39.99,
+    "stock": 15
+  },
+  {
+    "id": 2,
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "price": 42.50,
+    "stock": 0
+  },
+  {
+    "id": 3,
+    "title": "Designing Data-Intensive Applications",
+    "author": "Martin Kleppmann",
+    "price": 45.00,
+    "stock": 8
+  },
+  {
+    "id": 4,
+    "title": "Eloquent JavaScript",
+    "author": "Marijn Haverbeke",
+    "price": 25.00,
+    "stock": 25
+  },
+  {
+    "id": 5,
+    "title": "You Don't Know JS",
+    "author": "Kyle Simpson",
+    "price": 28.00,
+    "stock": 5
+  }
+]

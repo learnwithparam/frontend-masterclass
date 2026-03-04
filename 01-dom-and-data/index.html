@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore Catalog - Module 01</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <h1>📚 Bookstore</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Welcome to the Catalog</h2>
+            <p>This page dynamically fetches data from a local JSON file using Vanilla JavaScript.</p>
+        </section>
+
+        <!-- Our empty container where JS will inject elements -->
+        <div id="loading" class="loading">Fetching books...</div>
+        <div id="error-message" class="error hidden"></div>
+        <div id="book-list" class="book-grid"></div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
