@@ -1,5 +1,3 @@
-version: '3.8'
-
 # Full-Stack Deployment: Frontend + Backend
 # This brings up the ENTIRE application stack in production mode.
 

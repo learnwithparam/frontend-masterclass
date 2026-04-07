@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # smoke-all.sh — Run all frontend module smoke tests sequentially
 # Usage: bash scripts/smoke-all.sh [module_number]
-#   No args  → runs all 10 modules
+#   No args  → runs all 13 modules
 #   With arg → runs only that module (e.g., "bash scripts/smoke-all.sh 04")
 
 set -euo pipefail
@@ -26,6 +26,9 @@ MODULES=(
   "08-nextjs-server-actions"
   "09-optimistic-ui-streaming"
   "10-frontend-deployment"
+  "11-frontend-testing"
+  "12-forms-and-validation"
+  "13-realtime-ui"
 )
 
 PASSED=()

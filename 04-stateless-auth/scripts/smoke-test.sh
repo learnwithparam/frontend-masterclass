@@ -17,6 +17,7 @@ TEST_PASS="SmokePass123!"
 
 # ── Start backend ────────────────────────────────────────────────────
 start_backend_05 3000
+register_compose_dir "$BACKEND_05"
 
 # ── Test 1: Register ────────────────────────────────────────────────
 RESULT=$(http_post "$API/auth/register" "{\"username\":\"${TEST_USER}\",\"password\":\"${TEST_PASS}\"}")

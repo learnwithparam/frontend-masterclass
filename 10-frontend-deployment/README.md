@@ -39,6 +39,14 @@ docker compose up --build
 - Frontend: `http://localhost:3001`
 - Backend API: `http://localhost:3000`
 
+### Port Map
+
+- `3000` - backend API
+- `3001` - frontend app
+- `3002` - frontend testing app during Playwright runs
+
+These ports are intentionally fixed so the frontend course can sit beside the backend masterclass without cross-course collisions.
+
 ## Course Summary
 
 | Module | Technology | Key Concepts |

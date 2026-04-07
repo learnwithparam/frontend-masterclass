@@ -15,6 +15,7 @@ API="http://localhost:3000/api"
 
 # ── Start servers ────────────────────────────────────────────────────
 start_backend_05 3000
+register_compose_dir "$BACKEND_05"
 start_vite 5173 "$MODULE_DIR"
 
 # ── Test 1: Frontend serves ─────────────────────────────────────────

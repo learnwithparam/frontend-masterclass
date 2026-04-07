@@ -16,6 +16,7 @@ API="http://localhost:3000/api"
 # ── Start backend (module 12 with file uploads) ───────────────────
 BACKEND_12="$SCRIPT_DIR/../../backend-masterclass/12-api-hardening"
 echo -e "${YELLOW}Starting backend (module 12) on port 3000...${NC}"
+register_compose_dir "$BACKEND_12"
 pushd "$BACKEND_12" > /dev/null
 docker_up
 db_push

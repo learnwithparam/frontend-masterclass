@@ -15,7 +15,37 @@ API="http://localhost:3000/api"
 
 # ── Start servers ────────────────────────────────────────────────────
 start_backend_05 3000
+register_compose_dir "$BACKEND_05"
 start_nextjs 3001 "$MODULE_DIR"
+
+# ── Test 0: Deployment artifacts exist and match the lesson ────────
+if grep -Fq "FROM node:20-alpine AS builder" Dockerfile && \
+   grep -Fq "FROM node:20-alpine AS runner" Dockerfile && \
+   grep -Fq "EXPOSE 3001" Dockerfile; then
+  pass "Dockerfile uses multi-stage standalone deployment"
+else
+  fail "Dockerfile uses multi-stage standalone deployment"
+fi
+
+if grep -Fq "output: 'standalone'" next.config.ts; then
+  pass "Next config enables standalone output"
+else
+  fail "Next config enables standalone output"
+fi
+
+if grep -Fq "npm run lint" .github/workflows/ci.yml && \
+   grep -Fq "npm run build" .github/workflows/ci.yml; then
+  pass "GitHub Actions CI checks lint and build"
+else
+  fail "GitHub Actions CI checks lint and build"
+fi
+
+if grep -Fq '3001:3001' docker-compose.yml && \
+   grep -Fq 'BACKEND_URL=http://backend:3000/api' docker-compose.yml; then
+  pass "Docker Compose wires frontend and backend ports correctly"
+else
+  fail "Docker Compose wires frontend and backend ports correctly"
+fi
 
 # ── Test 1: Frontend serves ─────────────────────────────────────────
 STATUS=$(http_get "http://localhost:3001")

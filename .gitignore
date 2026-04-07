@@ -29,6 +29,8 @@ dist/
 build/
 out/
 .cache/
+playwright-report/
+test-results/
 
 # OS metadata
 .DS_Store

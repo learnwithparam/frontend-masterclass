@@ -18,6 +18,36 @@ fi
 # ── Backend paths ──────────────────────────────────────────────────
 BACKEND_03="$SCRIPT_DIR/../../backend-masterclass/03-rest-apis-and-express"
 BACKEND_05="$SCRIPT_DIR/../../backend-masterclass/05-auth-and-security"
+SMOKE_COMPOSE_DIRS=()
+
+register_compose_dir() {
+  local dir="$1"
+  SMOKE_COMPOSE_DIRS+=("$dir")
+}
+
+cleanup() {
+  for pid in "${SMOKE_PIDS[@]:-}"; do
+    kill "$pid" 2>/dev/null || true
+    wait "$pid" 2>/dev/null || true
+  done
+  SMOKE_PIDS=()
+
+  for port in 3000 3001 3002 5173; do
+    lsof -ti ":$port" 2>/dev/null | xargs kill -9 2>/dev/null || true
+  done
+
+  for f in ${SMOKE_WRAPPERS:-}; do
+    rm -f "$f" 2>/dev/null || true
+  done
+
+  for dir in "${SMOKE_COMPOSE_DIRS[@]:-}"; do
+    if [ -f "$dir/docker-compose.yml" ]; then
+      (cd "$dir" && docker compose down -v 2>/dev/null) || true
+    fi
+  done
+}
+
+trap cleanup EXIT
 
 # ── Start backend for frontend modules ─────────────────────────────
 # start_backend_03 — no auth, just CRUD books API
@@ -33,6 +63,7 @@ start_backend_03() {
 start_backend_05() {
   local port="${1:-3000}"
   echo -e "${YELLOW}Starting backend (module 05) on port ${port}...${NC}"
+  register_compose_dir "$BACKEND_05"
   pushd "$BACKEND_05" > /dev/null
   docker_up
   db_push
@@ -58,15 +89,11 @@ start_nextjs() {
   local port="$1"
   local dir="$2"
   echo -e "${YELLOW}Starting Next.js dev server on port ${port}...${NC}"
-  # Use next start (production) if .next exists, otherwise fall back to dev
-  if [ -f "$dir/.next/BUILD_ID" ]; then
-    (cd "$dir" && npx next start --port "$port" > /dev/null 2>&1) &
-  else
-    (cd "$dir" && npx next dev --port "$port" > /dev/null 2>&1) &
-  fi
+  # Smoke tests should exercise the current source tree, not a stale build.
+  (cd "$dir" && npx next dev --port "$port" > /dev/null 2>&1) &
   local pid=$!
   SMOKE_PIDS+=("$pid")
-  wait_for_http "http://localhost:${port}" 60 1
+  wait_for_http "http://localhost:${port}" 120 1
 }
 
 # ── Auth helpers ───────────────────────────────────────────────────

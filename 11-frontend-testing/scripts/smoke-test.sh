@@ -21,6 +21,7 @@ fi
 # ── Start backend for frontend serving test ────────────────────────
 API="http://localhost:3000/api"
 start_backend_05 3000
+register_compose_dir "$BACKEND_05"
 start_nextjs 3001 "$MODULE_DIR"
 
 # ── Test: Frontend serves ──────────────────────────────────────────

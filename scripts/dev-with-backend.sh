@@ -16,6 +16,9 @@ cleanup() {
   echo ""
   echo -e "${YELLOW}Shutting down backend...${NC}"
   [ -n "$BACKEND_PID" ] && kill "$BACKEND_PID" 2>/dev/null || true
+  if [ -f "$BACKEND_DIR/docker-compose.yml" ]; then
+    (cd "$BACKEND_DIR" && docker compose down -v 2>/dev/null) || true
+  fi
 }
 trap cleanup EXIT
 

@@ -14,6 +14,7 @@ echo ""
 # ── Start backend (module 13 with WebSocket support) ──────────────
 BACKEND_13="$SCRIPT_DIR/../../backend-masterclass/13-realtime-websockets"
 echo -e "${YELLOW}Starting backend (module 13) on port 3000...${NC}"
+register_compose_dir "$BACKEND_13"
 pushd "$BACKEND_13" > /dev/null
 docker_up
 db_push
